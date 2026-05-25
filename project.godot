@@ -1,7 +1,4 @@
-; Engine configuration file.
-; It's best edited using the editor UI and not directly,
-; since the parameters that go here are not obvious.
-; The full documentation is online at:
+; Engine configuration file for Driftworld
 ; https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html
 
 config_version=5
@@ -11,7 +8,6 @@ config_version=5
 config/name="Driftworld"
 config/description="Open-world survival sandbox with creature breeding and emotional immersion"
 run/main_scene="res://scenes/world.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
 [display]
@@ -23,60 +19,15 @@ window/stretch/mode="canvas_items"
 
 [input]
 
-move_forward = InputEventKey.new()
-move_forward.keycode = 87
-move_forward.pressed = true
-move_forward = InputEventKey.new()
-move_forward.keycode = 4194320
-move_forward.pressed = true
-
-move_backward = InputEventKey.new()
-move_backward.keycode = 83
-move_backward.pressed = true
-move_backward = InputEventKey.new()
-move_backward.keycode = 4194322
-move_backward.pressed = true
-
-move_left = InputEventKey.new()
-move_left.keycode = 65
-move_left.pressed = true
-move_left = InputEventKey.new()
-move_left.keycode = 4194319
-move_left.pressed = true
-
-move_right = InputEventKey.new()
-move_right.keycode = 68
-move_right.pressed = true
-move_right = InputEventKey.new()
-move_right.keycode = 4194321
-move_right.pressed = true
-
-jump = InputEventKey.new()
-jump.keycode = 32
-jump.pressed = true
-jump = InputEventKey.new()
-jump.keycode = 87
-jump.physical_keycode = 87
-jump.pressed = true
-
-sprint = InputEventKey.new()
-sprint.keycode = 4194325
-sprint.pressed = true
-
-crouch = InputEventKey.new()
-crouch.keycode = 4194326
-crouch.pressed = true
-
-glide = InputEventKey.new()
-glide.keycode = 32
-glide.pressed = true
-
-interact = InputEventKey.new()
-interact.keycode = 69
-interact.pressed = true
-interact = InputEventKey.new()
-interact.keycode = 4194320
-interact.pressed = true
+move_forward = {"type": "Key", "keycode": 87, "pressed": true}
+move_backward = {"type": "Key", "keycode": 83, "pressed": true}
+move_left = {"type": "Key", "keycode": 65, "pressed": true}
+move_right = {"type": "Key", "keycode": 68, "pressed": true}
+jump = {"type": "Key", "keycode": 32, "pressed": true}
+sprint = {"type": "Key", "keycode": 4194325, "pressed": true}
+crouch = {"type": "Key", "keycode": 4194326, "pressed": true}
+glide = {"type": "Key", "keycode": 32, "pressed": true}
+interact = {"type": "Key", "keycode": 69, "pressed": true}
 
 [rendering]
 
