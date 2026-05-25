@@ -1,0 +1,85 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not obvious.
+; The full documentation is online at:
+; https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html
+
+config_version=5
+
+[application]
+
+config/name="Driftworld"
+config/description="Open-world survival sandbox with creature breeding and emotional immersion"
+run/main_scene="res://scenes/world.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://assets/icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=true
+window/stretch/mode="canvas_items"
+
+[input]
+
+move_forward = InputEventKey.new()
+move_forward.keycode = 87
+move_forward.pressed = true
+move_forward = InputEventKey.new()
+move_forward.keycode = 4194320
+move_forward.pressed = true
+
+move_backward = InputEventKey.new()
+move_backward.keycode = 83
+move_backward.pressed = true
+move_backward = InputEventKey.new()
+move_backward.keycode = 4194322
+move_backward.pressed = true
+
+move_left = InputEventKey.new()
+move_left.keycode = 65
+move_left.pressed = true
+move_left = InputEventKey.new()
+move_left.keycode = 4194319
+move_left.pressed = true
+
+move_right = InputEventKey.new()
+move_right.keycode = 68
+move_right.pressed = true
+move_right = InputEventKey.new()
+move_right.keycode = 4194321
+move_right.pressed = true
+
+jump = InputEventKey.new()
+jump.keycode = 32
+jump.pressed = true
+jump = InputEventKey.new()
+jump.keycode = 87
+jump.physical_keycode = 87
+jump.pressed = true
+
+sprint = InputEventKey.new()
+sprint.keycode = 4194325
+sprint.pressed = true
+
+crouch = InputEventKey.new()
+crouch.keycode = 4194326
+crouch.pressed = true
+
+glide = InputEventKey.new()
+glide.keycode = 32
+glide.pressed = true
+
+interact = InputEventKey.new()
+interact.keycode = 69
+interact.pressed = true
+interact = InputEventKey.new()
+interact.keycode = 4194320
+interact.pressed = true
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
+environment/defaults/default_clear_color=Color(0.05, 0.03, 0.08, 1)
+anti_aliasing/quality/msaa_3d=2

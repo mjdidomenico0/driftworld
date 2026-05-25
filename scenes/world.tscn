@@ -1,0 +1,183 @@
+[gd_scene load_steps=12 format=3 uid="uid://driftworld_world"]
+
+[ext_resource type="Script" path="res://scenes/world.gd" id="1_world"]
+
+[sub_resource type="ProceduralSkyMesh" id="ProceduralSkyMesh_1"]
+radius = 128.0
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.1, 0.05, 0.15, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.3, 0.25, 0.4, 1)
+ambient_light_energy = 0.6
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.5
+glow_strength = 0.8
+glow_bloom = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ground"]
+albedo_color = Color(0.15, 0.12, 0.1, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_forest_ground"]
+size = Vector3(200, 2, 200)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cliff_rock"]
+size = Vector3(30, 15, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rock"]
+albedo_color = Color(0.25, 0.22, 0.2, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tree_trunk"]
+top_radius = 0.3
+bottom_radius = 0.5
+height = 12.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_tree_canopy"]
+radius = 4.0
+height = 8.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_canopy"]
+albedo_color = Color(0.08, 0.25, 0.12, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glow_fungi"]
+albedo_color = Color(0.1, 0.8, 0.5, 1)
+emission_enabled = true
+emission = Color(0.2, 1.0, 0.6, 1)
+emission_energy_multiplier = 2.0
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_world")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433013, 0.75, 0, 30, 0)
+light_color = Color(0.9, 0.7, 0.5, 1)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="Sky" type="Sky" parent="."]
+sky_material = SubResource("ProceduralSkyMesh_1")
+
+[node name="DayNightTimer" type="Timer" parent="."]
+
+[node name="Island" type="Node3D" parent="."]
+
+[node name="ForestZone" type="Node3D" parent="Island"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, 0)
+
+[node name="Ground" type="StaticBody3D" parent="Island/ForestZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Island/ForestZone/Ground"]
+mesh = SubResource("BoxMesh_forest_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Island/ForestZone/Ground"]
+shape = SubResource("BoxMesh_forest_ground")
+
+[node name="Trees" type="Node3D" parent="Island/ForestZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Tree1" type="StaticBody3D" parent="Island/ForestZone/Trees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Trunk" type="MeshInstance3D" parent="Island/ForestZone/Trees/Tree1"]
+mesh = SubResource("CylinderMesh_tree_trunk")
+
+[node name="Canopy" type="MeshInstance3D" parent="Island/ForestZone/Trees/Tree1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("SphereMesh_tree_canopy")
+surface_material_override/0 = SubResource("StandardMaterial3D_canopy")
+
+[node name="Tree2" type="StaticBody3D" parent="Island/ForestZone/Trees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 6, 5)
+
+[node name="Trunk" type="MeshInstance3D" parent="Island/ForestZone/Trees/Tree2"]
+mesh = SubResource("CylinderMesh_tree_trunk")
+
+[node name="Canopy" type="MeshInstance3D" parent="Island/ForestZone/Trees/Tree2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("SphereMesh_tree_canopy")
+surface_material_override/0 = SubResource("StandardMaterial3D_canopy")
+
+[node name="Tree3" type="StaticBody3D" parent="Island/ForestZone/Trees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 6, 8)
+
+[node name="Trunk" type="MeshInstance3D" parent="Island/ForestZone/Trees/Tree3"]
+mesh = SubResource("CylinderMesh_tree_trunk")
+
+[node name="Canopy" type="MeshInstance3D" parent="Island/ForestZone/Trees/Tree3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("SphereMesh_tree_canopy")
+surface_material_override/0 = SubResource("StandardMaterial3D_canopy")
+
+[node name="GlowingFungi" type="Node3D" parent="Island/ForestZone"]
+
+[node name="Fungi1" type="MeshInstance3D" parent="Island/ForestZone/GlowingFungi"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 2)
+mesh = SubResource("SphereMesh_tree_canopy")
+surface_material_override/0 = SubResource("StandardMaterial3D_glow_fungi")
+
+[node name="Fungi2" type="MeshInstance3D" parent="Island/ForestZone/GlowingFungi"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -5, 0.3, 4)
+mesh = SubResource("SphereMesh_tree_canopy")
+surface_material_override/0 = SubResource("StandardMaterial3D_glow_fungi")
+
+[node name="MeadowZone" type="Node3D" parent="Island"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 0)
+
+[node name="Ground" type="StaticBody3D" parent="Island/MeadowZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Island/MeadowZone/Ground"]
+mesh = SubResource("BoxMesh_forest_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Island/MeadowZone/Ground"]
+shape = SubResource("BoxMesh_forest_ground")
+
+[node name="CliffZone" type="Node3D" parent="Island"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 0)
+
+[node name="Ground" type="StaticBody3D" parent="Island/CliffZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Island/CliffZone/Ground"]
+mesh = SubResource("BoxMesh_forest_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Island/CliffZone/Ground"]
+shape = SubResource("BoxMesh_forest_ground")
+
+[node name="CliffRock" type="StaticBody3D" parent="Island/CliffZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, -10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Island/CliffZone/CliffRock"]
+mesh = SubResource("BoxMesh_cliff_rock")
+surface_material_override/0 = SubResource("StandardMaterial3D_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Island/CliffZone/CliffRock"]
+shape = SubResource("BoxMesh_cliff_rock")
+
+[node name="River" type="Node3D" parent="Island"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0.1, 0)
+
+[node name="WaterPlane" type="MeshInstance3D" parent="Island/River"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+mesh = SubResource("BoxMesh_forest_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+
+[node name="PlayerSpawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Player" parent="." instance=ExtResource("res://scenes/player.tscn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[connection signal="timeout" from="DayNightTimer" to="." method="_on_day_night_timer_timeout"]

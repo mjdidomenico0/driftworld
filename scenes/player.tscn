@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://driftworld_player"]
+
+[ext_resource type="Script" path="res://scripts/player_controller.gd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius=0.4
+height=1.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wallcheck"]
+radius=0.6
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("res://scripts/player_controller.gd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+fov = 70.0
+
+[node name="Mesh" type="Node3D" parent="."]
