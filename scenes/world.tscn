@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Script" path="res://scenes/world.gd" id="1"]
+[ext_resource type="Script" id="1" path="res://scenes/world.gd"]
+[ext_resource type="PackedScene" id="2" path="res://scenes/player.tscn"]
 
 [sub_resource type="Environment" id="E1"]
 background_mode = 1
@@ -51,7 +52,7 @@ surface_material_override/0 = SubResource("M1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("B2")
 
-[node name="Player" parent="." instance=ExtResource("res://scenes/player.tscn")]
+[node name="Player" parent="." instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [connection signal="timeout" from="DayNightTimer" to="." method="_on_day_night_timer_timeout"]
