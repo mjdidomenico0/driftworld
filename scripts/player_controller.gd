@@ -170,7 +170,7 @@ func _check_wall_climb() -> bool:
 		)
 		var result := space_state.intersect_ray(query)
 		if result:
-			var normal := result["normal"]
+			var normal: Vector3 = result["normal"]
 			# Check if wall is steep enough to climb
 			if normal.y < wall_angle_threshold and normal.y >= 0:
 				climb_normal = normal
